@@ -1,4 +1,4 @@
-def palindrome(word):
+def largest_palindrome(word):
     start_index = 0
     end_index = 0
     for index, _ in enumerate(word):
@@ -11,7 +11,6 @@ def palindrome(word):
             left -= 1
             right += 1
 
-
         left = index
         right = index + 1
         while left >= 0 and right < len(word) and word[left] == word[right]:
@@ -23,5 +22,8 @@ def palindrome(word):
 
     return word[start_index: end_index + 1]
 
-print(palindrome("madam"))
-print(palindrome("noon"))
+
+print(largest_palindrome("noon"))
+print(largest_palindrome("madam"))
+print(largest_palindrome("testuautspoq"))
+
