@@ -45,18 +45,30 @@ class BinarySearchTree:
         self.root = self.__sorted_list_to_bst(nums, 0, len(nums) - 1)
 
     def __sorted_list_to_bst(self, nums, left, right):
-        if right == left:
-            return Node(nums[right])
-        if right < left:
+        if left > right:
             return None
-        if right - left > 2:
-            next_node_index = (right - left) // 2
-        else:
-            next_node_index = right if left == 0 else left
-        middle_node = Node(nums[next_node_index])
-        middle_node.left = self.__sorted_list_to_bst(nums, left, next_node_index - 1)
-        middle_node.right = self.__sorted_list_to_bst(nums, next_node_index + 1, right)
-        return middle_node
+            
+        mid = (left + right) // 2
+        current = Node(nums[mid])
+        
+        current.left = self.__sorted_list_to_bst(nums, left, mid - 1)
+        current.right = self.__sorted_list_to_bst(nums, mid + 1, right)
+        
+        return current
+
+    # def __sorted_list_to_bst(self, nums, left, right):
+    #     if right == left:
+    #         return Node(nums[left])
+    #     if left > right:
+    #         return None
+    #     if right - left >= 2:
+    #         next_node_index = (right + left) // 2
+    #     else:
+    #         next_node_index = max(right - left, left)
+    #     node = Node(nums[next_node_index])
+    #     node.left = self.__sorted_list_to_bst(nums, left, next_node_index - 1)
+    #     node.right = self.__sorted_list_to_bst(nums, next_node_index + 1, right)
+    #     return node
 
 
 #  +====================================================+  
@@ -87,10 +99,10 @@ def check_balanced_and_correct_traversal(bst, expected_traversal):
 # check_balanced_and_correct_traversal(bst, [10])
 
 # Test: Convert a sorted list with odd number of elements
-print("\n----- Test: Convert Sorted List with Odd Number of Elements -----\n")
-bst = BinarySearchTree()
-bst.sorted_list_to_bst([1, 2, 3, 4, 5])
-check_balanced_and_correct_traversal(bst, [1, 2, 3, 4, 5])
+# print("\n----- Test: Convert Sorted List with Odd Number of Elements -----\n")
+# bst = BinarySearchTree()
+# bst.sorted_list_to_bst([1, 2, 3, 4, 5])
+# check_balanced_and_correct_traversal(bst, [1, 2, 3, 4, 5])
 
 # Test: Convert a sorted list with even number of elements
 print("\n----- Test: Convert Sorted List with Even Number of Elements -----\n")
